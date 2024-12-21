@@ -1,8 +1,8 @@
 [package]
 name = "taurid"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "Tauri Template with React."
+authors = ["mcge <mcgeq@outlook.com>"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -22,4 +22,30 @@ tauri = { version = "2", features = [] }
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+dotenvy = "0.15.7"
+anyhow = "1.0.94"
+thiserror = "2.0.8"
+chrono = "0.4.39"
+tokio = { version = "1.42.0", features = ["full"] }
+toml = "0.8.19"
+url = "2.5.4"
+tauri-plugin-dialog = "2"
+tauri-plugin-os = "2"
+tauri-plugin-clipboard-manager = "2.2.0"
+tauri-plugin-process = "2"
+tauri-plugin-shell = "2"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter", "time", "json"] }
+tracing = { version = "0.1.41", features = ["log", "release_max_level_info"] }
+time = { version = "0.3.37", features = ["macros", "serde"] }
+tracing-appender = "0.2.3"
+lettre = "0.11.11"
+
+[profile.release]
+panic = 'abort'
+opt-level = "s"
+lto = true
+strip = true
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-single-instance = "2"
 

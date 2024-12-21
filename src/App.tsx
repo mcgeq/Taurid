@@ -2,6 +2,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { useState } from 'react';
 import './App.css';
 import reactLogo from './assets/react.svg';
+import { LgLevel, lg } from './utils/mglog';
 
 function App() {
   const [greetMsg, setGreetMsg] = useState('');
@@ -10,6 +11,8 @@ function App() {
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
     setGreetMsg(await invoke('greet', { name }));
+
+    lg(LgLevel.I, 'testing front log');
   }
 
   return (
