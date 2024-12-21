@@ -12,9 +12,15 @@
   "app": {
     "windows": [
       {
-        "title": "taurid",
-        "width": 800,
-        "height": 600
+        "title": "Taurid",
+        "width": 1200,
+        "height": 600,
+        "center": true,
+        "fullscreen": false,
+        "maximizable": false,
+        "resizable": false,
+        "decorations": true,
+        "visible": true
       }
     ],
     "security": {
