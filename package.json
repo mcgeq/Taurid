@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "lint": "oxlint src",
+    "fix": "oxlint src --fix --fix-suggestions --fix-dangerously",
     "test": "vitest"
   },
   "dependencies": {
