@@ -21,13 +21,13 @@ use tracing_subscriber::{
     EnvFilter,
 };
 
-use crate::{mglobal::{
-    load_app_global_config,
-    project_root,
-    write_app_global_config,
-    APP_GLOBAL_CONFIG,
-    PROJECT_ROOT_DIR
-}, utils::mcge_files::McgeUtils};
+use crate::{
+    mglobal::{
+        load_app_global_config, project_root, write_app_global_config, APP_GLOBAL_CONFIG,
+        PROJECT_ROOT_DIR,
+    },
+    utils::mcge_files::McgeUtils,
+};
 
 fn setup_logging() -> WorkerGuard {
     // root_dir
@@ -84,9 +84,7 @@ fn setup_project_root() {
 fn setup_app_global_config() {
     write_app_global_config();
 
-    APP_GLOBAL_CONFIG.get_or_init(|| {
-            load_app_global_config()
-    });
+    APP_GLOBAL_CONFIG.get_or_init(|| load_app_global_config());
 }
 
 pub fn setup() -> WorkerGuard {

@@ -62,7 +62,12 @@ pub fn load_app_global_config() -> ConfigGlobal {
     config_file.set_extension("toml");
     match McgeConfigToml::load(config_file) {
         Ok(config) => config,
-        Err(_) => ConfigGlobal { window: McgeWindow { main_width: 1200, main_height: 800 } }
+        Err(_) => ConfigGlobal {
+            window: McgeWindow {
+                main_width: 1200,
+                main_height: 800,
+            },
+        },
     }
 }
 
