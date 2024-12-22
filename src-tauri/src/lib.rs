@@ -1,3 +1,13 @@
+// -----------------------------------------------------------------------------
+//    Copyright (C) 2024 mcge. All rights reserved.
+// Author:         mcge
+// Email:          <mcgeq@outlook.com>
+// File:           lib.rs
+// Description:    Application start main
+// Create   Date:  2024-12-22 15:23:02
+// Last Modified:  2024-12-22 15:23:14
+// Modified   By:  mcge <mcgeq@outlook.com>
+// ----------------------------------------------------------------------------
 mod common;
 mod mgcommand;
 mod mgerror;
@@ -22,6 +32,7 @@ async fn show_main_window(app: AppHandle) {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let _guard = setup();
+    info!("All configurations have benn loaded.");
     info!("Application starting...");
 
     tauri::Builder::default()
@@ -40,5 +51,4 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![show_main_window, logmg, greet])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
-    info!("Application started successfully");
 }

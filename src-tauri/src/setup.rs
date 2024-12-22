@@ -6,8 +6,8 @@
 //  File:           setup.rs
 //  Description:    Application Starting
 //  Create   Date:  2024-12-21 15:35:07
-//  Last Modified:  2024-12-21 20:03:39
-//  Modified   By:  mcge  <mcgeq@outlook.com>
+//  Last Modified:  2024-12-22 14:55:59
+//  Modified   By:  mcge <mcgeq@outlook.com>
 // -----------------------------------------------------------------------------
 
 use std::path::PathBuf;
@@ -21,14 +21,17 @@ use tracing_subscriber::{
     EnvFilter,
 };
 
-use crate::mglobal::{
-    get_app_global_config, project_root_dir, write_app_global_config, APP_GLOBAL_CONFIG,
-    PROJECT_ROOT_DIR,
-};
+use crate::{mglobal::{
+    load_app_global_config,
+    project_root,
+    write_app_global_config,
+    APP_GLOBAL_CONFIG,
+    PROJECT_ROOT_DIR
+}, utils::mcge_files::McgeUtils};
 
 fn setup_logging() -> WorkerGuard {
     // root_dir
-    let project_path = PROJECT_ROOT_DIR.get().unwrap();
+    let project_path = project_root();
 
     let time_fmt =
         format_description!("[year]-[month]-[day] [hour]:[minute]:[second].[subsecond digits:3]");
@@ -75,16 +78,14 @@ fn setup_logging() -> WorkerGuard {
 
 fn setup_project_root() {
     // 初始化根目录
-    PROJECT_ROOT_DIR.get_or_init(|| project_root_dir());
+    PROJECT_ROOT_DIR.get_or_init(|| McgeUtils::project_root_path().unwrap_or_default());
 }
 
 fn setup_app_global_config() {
     write_app_global_config();
 
     APP_GLOBAL_CONFIG.get_or_init(|| {
-        PROJECT_ROOT_DIR
-            .get()
-            .and_then(|root_dir| get_app_global_config(root_dir))
+            load_app_global_config()
     });
 }
 
